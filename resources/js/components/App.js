@@ -1,19 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import Navigation from './Navigation';
+import Home from './pages/Home';
+import AllColors from './pages/AllColors';
 
 function App() {
     return (
-        <div className="container">
-            <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="card">
-                        <div className="card-header">Example Component</div>
-
-                        <div className="card-body">I'm an example component!</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <BrowserRouter>
+          <div>
+            <Navigation />
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/all-colors' component={AllColors} />
+            </Switch>
+          </div>
+        </BrowserRouter>
     );
 }
 
