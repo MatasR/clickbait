@@ -9,13 +9,11 @@ import AllColors from './pages/AllColors';
 function App() {
     return (
         <BrowserRouter>
-          <div>
-            <Navigation />
-            <Switch>
-              <Route exact path='/' component={Home} />
-              <Route exact path='/all-colors' component={AllColors} />
-            </Switch>
-          </div>
+          <Navigation />
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/all-colors' component={AllColors} />
+          </Switch>
         </BrowserRouter>
     );
 }

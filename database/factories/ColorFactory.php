@@ -6,7 +6,9 @@ use App\Color;
 use Faker\Generator as Faker;
 
 $factory->define(Color::class, function (Faker $faker) {
+
     return [
-        'hex' => $faker->hexcolor()
+        'hex' => $faker->unique()->hexcolor(),
+        'description' => $faker->sentence()
     ];
 });
