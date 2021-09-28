@@ -1,16 +1,17 @@
 <?php
 
+use App\Color;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class ColorSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Create 4k random colors
      *
      * @return void
      */
     public function run()
     {
-        $this->call(ColorSeeder::class);
+        factory(Color::class, 50)->create();
     }
 }
