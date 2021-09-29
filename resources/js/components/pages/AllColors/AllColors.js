@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-import List from '../List'
+import List from '../../List'
 
 class AllColors extends Component {
     constructor() {

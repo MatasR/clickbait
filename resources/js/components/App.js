@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import Navigation from './Navigation'
-import Home from './pages/Home'
-import AllColors from './pages/AllColors'
-import Color from './pages/Color'
+import Home from './pages/Home/Home'
+import AllColors from './pages/AllColors/AllColors'
+import Color from './pages/Color/Color'
 
 function App() {
     return (

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-import Voting from '../Voting'
-import List from '../List'
+import Voting from './Voting'
+import List from '../../List'
 
 class Home extends Component {
   render() {

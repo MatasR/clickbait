@@ -20,7 +20,7 @@ class List extends Component {
 
     render(){
       return (
-        <div className="bg-white shadow-sm mt-3">
+        <div className="bg-white shadow-sm my-3">
           {/* Title */}
           {this.props.title &&
             <>
@@ -29,30 +29,32 @@ class List extends Component {
             </>
           }
           {/* List */}
-          <table className="table table-borderless table-striped table-hover">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Color</th>
-                <th>Hex</th>
-                <th>Wins</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.colors.map(color => (
-                <tr key={color.id}>
-                  <th>{color.id}</th>
-                  <td>
-                    <span className="badge bg-secondary p-3 px-4 m-0" ref={(el)=>{if(el){el.style.setProperty('background-color', color.hex, 'important')}}}> </span>
-                  </td>
-                  <td>{color.hex}</td>
-                  <td>{color.wins}</td>
-                  <td><Link to={"/color/"+color.id} className="btn btn-primary">Preview</Link></td>
+          <div className="table-responsive">
+            <table className="table table-borderless table-striped table-hover mb-0">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Color</th>
+                  <th>Hex</th>
+                  <th>Wins</th>
+                  <th></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {this.state.colors.map(color => (
+                  <tr key={color.id}>
+                    <th>{color.id}</th>
+                    <td>
+                      <span className="badge bg-secondary p-3 px-4 m-0" ref={(el)=>{if(el){el.style.setProperty('background-color', color.hex, 'important')}}}> </span>
+                    </td>
+                    <td>{color.hex}</td>
+                    <td>{color.wins}</td>
+                    <td><Link to={"/color/"+color.id} className="btn btn-primary">Preview</Link></td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )
     }

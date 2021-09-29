@@ -1,6 +1,6 @@
 // import axios from 'axios'
 import React, { Component } from 'react'
-import Comments from '../Comments'
+import Comments from './Comments'
 
 class Color extends Component {
     constructor(){
@@ -27,8 +27,8 @@ class Color extends Component {
         <div className="container col-md-6">
 
           {/* Color code */}
-          <div className="mb-3 rounded shadow-sm d-flex align-items-center justify-content-center" style={{ height: '16rem', backgroundColor: color.hex }}>
-            <h2 className="text-white display-3 font-weight-bold">{color.hex}</h2>
+          <div className="mb-3 rounded shadow-sm d-flex align-items-center justify-content-center" style={{ height: '16rem', backgroundColor: color.hex, boxShadow: "inset 0 0 5rem rgba(0, 0, 0, .15)" }}>
+            <h2 className="text-white display-4 font-weight-bold">{color.hex}</h2>
           </div>
           {/* Color info */}
           <ul className="list-group list-group-flush rounded shadow-sm">
