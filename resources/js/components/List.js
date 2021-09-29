@@ -11,7 +11,7 @@ class List extends Component {
     }
 
     componentDidMount() {
-      axios.get('/api/colors' + (this.props.limit ? '?limit='+this.props.limit : '')).then(response => {
+      axios.get('/api/colors?'+(this.props.limit ? 'limit='+this.props.limit : '')+(this.props.order ? '&order='+this.props.order : '')).then(response => {
         this.setState({
           colors: response.data
         })
@@ -33,7 +33,7 @@ class List extends Component {
           <table className="table table-borderless table-striped table-hover">
             <thead>
               <tr>
-                <th>#</th>
+                <th>ID</th>
                 <th>Color</th>
                 <th>Hex</th>
                 <th>Wins</th>

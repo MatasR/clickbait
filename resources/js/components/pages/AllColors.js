@@ -24,7 +24,7 @@ class AllColors extends Component {
       const { colors } = this.state
       return (
         <div className="container bg-white shadow-sm mt-4 rounded p-0">
-          <List />
+          <List order="wins"/>
         </div>
       )
     }

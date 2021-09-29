@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('colors', 'ColorController@index');
+Route::post('colors/vote', 'ColorController@vote');

@@ -19,7 +19,7 @@ class Home extends Component {
         <Voting />
 
         {/* Top10 */}
-        <List title="Top 10 colors" limit="10"/>
+        <List title="Top 10 colors" limit="10" order="wins"/>
 
       </div>
     )
