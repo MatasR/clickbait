@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 
 function Navigation() {
     return (
-      <nav className="navbar navbar-light bg-white shadow-sm">
+      <nav className="navbar navbar-light bg-white shadow-sm mb-3">
         <div className="container">
 
-          <Link className="navbar-brand" to="/">Click Bait</Link>
+          <Link className="navbar-brand" to="/">Clickbait</Link>
 
           <ul className="navbar-nav">
             <li className="nav-item">

@@ -11,7 +11,7 @@ function App() {
         <BrowserRouter>
           <Navigation />
           <Switch>
-            <Route exact path='/' component={Home} />
+            <Route exact path='' component={Home} />
             <Route exact path='/all-colors' component={AllColors} />
           </Switch>
         </BrowserRouter>
