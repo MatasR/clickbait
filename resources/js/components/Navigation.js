@@ -10,7 +10,7 @@ function Navigation() {
 
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-item" to="/all-colors">All Colors</Link>
+              <Link className="nav-item" to="/new-color">Add Color</Link>
             </li>
           </ul>
         </div>

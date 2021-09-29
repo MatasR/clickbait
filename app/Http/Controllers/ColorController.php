@@ -7,9 +7,12 @@ use App\Color;
 
 class ColorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-      $colors = Color::get();
+      if($request->has('limit'))
+        $colors = Color::limit($request['limit'])->orderby('wins')->get();
+      else
+        $colors = Color::orderby('wins')->get();
 
       return $colors->toJson();
     }
