@@ -13,4 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/{path?}', 'app');
+// Old version
+// Route::view('/{path?}', 'app');
+// Required for nested urls that have more than one "/"
+Route::get('/{path?}', function(){
+  return view('app');
+})->where('path', '.*');

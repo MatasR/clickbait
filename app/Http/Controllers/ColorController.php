@@ -24,10 +24,15 @@ class ColorController extends Controller
       return $colors->toJson();
     }
 
-    // Endpoint for submiting vote
-    public function vote(Request $request)
+    // Show single color data
+    public function show(Color $color)
     {
-      $color = Color::find($request['color']);
+      return $color->toJson();
+    }
+
+    // Endpoint for submiting vote
+    public function vote(Color $color)
+    {
       $color->wins++;
       $color->save();
     }

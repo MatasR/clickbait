@@ -23,8 +23,11 @@ class AllColors extends Component {
     render () {
       const { colors } = this.state
       return (
-        <div className="container bg-white shadow-sm mt-4 rounded p-0">
-          <List order="wins"/>
+        <div className="container">
+          <h2>All colors</h2>
+          <div className="container bg-white shadow-sm rounded p-0">
+            <List order="wins"/>
+          </div>
         </div>
       )
     }

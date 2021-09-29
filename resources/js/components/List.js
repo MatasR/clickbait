@@ -19,7 +19,6 @@ class List extends Component {
     }
 
     render(){
-      const { colors } = this.state
       return (
         <div className="bg-white shadow-sm mt-3">
           {/* Title */}
@@ -41,7 +40,7 @@ class List extends Component {
               </tr>
             </thead>
             <tbody>
-              {colors.map(color => (
+              {this.state.colors.map(color => (
                 <tr key={color.id}>
                   <th>{color.id}</th>
                   <td>

@@ -21,7 +21,7 @@ class Voting extends Component {
     }
 
     onVote(color){
-      axios.post('/api/colors/vote', {color: color}).then(() => {this.loadNewColors()})
+      axios.put(`/api/colors/vote/${color}`).then(() => {this.loadNewColors()})
     }
 
     componentDidMount() {

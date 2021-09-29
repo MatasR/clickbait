@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Navigation from './Navigation'
 import Home from './pages/Home'
 import AllColors from './pages/AllColors'
+import Color from './pages/Color'
 
 function App() {
     return (
@@ -12,7 +13,8 @@ function App() {
           <Navigation />
           <Switch>
             <Route exact path='/' component={Home} />
-            <Route exact path='/all-colors' component={AllColors} />
+            <Route path='/all-colors' component={AllColors} />
+            <Route path='/color/:id' component={Color} />
           </Switch>
         </BrowserRouter>
     );
