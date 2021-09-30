@@ -70803,7 +70803,7 @@ var AllColors = /*#__PURE__*/function (_Component) {
       colors: [],
       currentColors: [],
       currentPage: 1,
-      colorsPerPage: 10
+      colorsPerPage: 100
     };
     return _this;
   }
@@ -70846,17 +70846,17 @@ var AllColors = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "All colors"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container p-0"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_2__["default"], {
         colors: this.state.currentColors
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Pagination__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Pagination__WEBPACK_IMPORTED_MODULE_3__["default"], {
         colorsPerPage: this.state.colorsPerPage,
         totalColors: this.state.colors.length,
         changePage: this.changePage.bind(this)
-      })));
+      }));
     }
   }]);
 
@@ -70943,6 +70943,7 @@ var Pagination = /*#__PURE__*/function (_Component) {
       var _this2 = this;
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+        className: "d-flex justify-content-center",
         "aria-label": "Page navigation example"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "pagination"

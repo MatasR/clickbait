@@ -11,7 +11,7 @@ class AllColors extends Component {
         colors: [],
         currentColors: [],
         currentPage: 1,
-        colorsPerPage: 10
+        colorsPerPage: 100
       }
     }
 
@@ -44,13 +44,15 @@ class AllColors extends Component {
 
     render () {
       return (
-        <div className="container">
-          <h2>All colors</h2>
-          <div className="container p-0">
-            <List colors={this.state.currentColors} />
-            <Pagination colorsPerPage={this.state.colorsPerPage} totalColors={this.state.colors.length} changePage={this.changePage.bind(this)} />
+        <>
+          <div className="container">
+            <h2>All colors</h2>
+            <div className="container p-0">
+              <List colors={this.state.currentColors} />
+            </div>
           </div>
-        </div>
+          <Pagination colorsPerPage={this.state.colorsPerPage} totalColors={this.state.colors.length} changePage={this.changePage.bind(this)} />
+        </>
       )
     }
 }

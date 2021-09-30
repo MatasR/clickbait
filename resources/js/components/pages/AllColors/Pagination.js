@@ -25,7 +25,7 @@ class Pagination extends Component {
 
     render(){
       return(
-        <nav aria-label="Page navigation example">
+        <nav className="d-flex justify-content-center" aria-label="Page navigation example">
           <ul className="pagination">
             {this.state.pageNumbers.map(pageNumber => (
               <li key={pageNumber} className="page-item"><a className="page-link" href="#" onClick={() => this.props.changePage(pageNumber)}>{pageNumber}</a></li>

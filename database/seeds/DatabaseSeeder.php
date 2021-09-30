@@ -11,6 +11,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(ColorSeeder::class);
+        $this->call([
+          ColorSeeder::class,
+          CommentSeeder::class
+        ]);
     }
 }
