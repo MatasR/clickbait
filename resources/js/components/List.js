@@ -22,8 +22,11 @@ class List extends Component {
     }
 
     componentDidUpdate() {
-      // If colors are passed as prop - get them at each update (only if the colors are not the same)
-      if(this.state.colors != this.props.colors)
+      // This should run only one time, after colors are loaded in parent component
+      // If colors are passed as prop - assign to state colors
+      // Only allow if we do not already have the same colors array in state
+      // (I believe this is the wrong way to solve this problem tho)
+      if(this.props.colors && this.props.colors != this.state.colors)
         this.setState({colors: this.props.colors})
     }
 
@@ -50,6 +53,7 @@ class List extends Component {
                 </tr>
               </thead>
               <tbody>
+                {console.log(this.state.colors)}
                 {this.state.colors.map(color => (
                   <tr key={color.id}>
                     <th>{color.id}</th>

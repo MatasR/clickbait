@@ -9,7 +9,10 @@ class AllColors extends Component {
     constructor() {
       super()
       this.state = {
-        colors: []
+        colors: [],
+        currentColors: [],
+        currentPage: 1,
+        colorsPerPage: 10
       }
     }
 
@@ -18,6 +21,25 @@ class AllColors extends Component {
         this.setState({
           colors: response.data
         })
+        this.handlePaginationCalculations()
+      })
+    }
+
+    handlePaginationCalculations() {
+      const indexOfLastColor = this.state.currentPage * this.state.colorsPerPage
+      const indexOfFirstColor = indexOfLastColor - this.state.colorsPerPage
+
+      this.setState({
+        currentColors: this.state.colors.slice(indexOfFirstColor, indexOfLastColor)
+      })
+    }
+
+    // Called from pagination component
+    changePage(newPage) {
+      this.setState({
+        currentPage: newPage
+      }, () => { // Callback for After state is changed, cause setState is async
+        this.handlePaginationCalculations()
       })
     }
 
@@ -26,8 +48,8 @@ class AllColors extends Component {
         <div className="container">
           <h2>All colors</h2>
           <div className="container p-0">
-            <List colors={this.state.colors} />
-            <Pagination />
+            <List colors={this.state.currentColors} />
+            <Pagination colorsPerPage={this.state.colorsPerPage} totalColors={this.state.colors.length} changePage={this.changePage.bind(this)} />
           </div>
         </div>
       )

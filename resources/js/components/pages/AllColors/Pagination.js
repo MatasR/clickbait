@@ -1,15 +1,35 @@
 import React, { Component } from 'react'
 
 class Pagination extends Component {
+    constructor(){
+      super()
+      this.state = {
+        pageNumbers: []
+      }
+    }
+
+    // Calculate amount of pageNumbers
+    // We should not use componentDidUpdate hook here i think
+    componentDidUpdate(){
+      // Only allow one time - if pageNumbers array is empty
+      if(!this.state.pageNumbers.length){
+
+        const newPageNumbers = []
+        for(let i = 1; i <= Math.ceil(this.props.totalColors / this.props.colorsPerPage); i++)
+          newPageNumbers.push(i)
+
+        this.setState({pageNumbers: newPageNumbers})
+
+      }
+    }
+
     render(){
       return(
         <nav aria-label="Page navigation example">
           <ul className="pagination">
-            <li className="page-item"><a className="page-link" href="#">Previous</a></li>
-            <li className="page-item"><a className="page-link" href="#">1</a></li>
-            <li className="page-item"><a className="page-link" href="#">2</a></li>
-            <li className="page-item"><a className="page-link" href="#">3</a></li>
-            <li className="page-item"><a className="page-link" href="#">Next</a></li>
+            {this.state.pageNumbers.map(pageNumber => (
+              <li key={pageNumber} className="page-item"><a className="page-link" href="#" onClick={() => this.props.changePage(pageNumber)}>{pageNumber}</a></li>
+            ))}
           </ul>
         </nav>
       )

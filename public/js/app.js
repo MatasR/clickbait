@@ -70673,8 +70673,11 @@ var List = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
-      // If colors are passed as prop - get them at each update (only if the colors are not the same)
-      if (this.state.colors != this.props.colors) this.setState({
+      // This should run only one time, after colors are loaded in parent component
+      // If colors are passed as prop - assign to state colors
+      // Only allow if we do not already have the same colors array in state
+      // (I believe this is the wrong way to solve this problem tho)
+      if (this.props.colors && this.props.colors != this.state.colors) this.setState({
         colors: this.props.colors
       });
     }
@@ -70692,7 +70695,7 @@ var List = /*#__PURE__*/function (_Component) {
         className: "table-responsive"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("table", {
         className: "table table-borderless table-striped table-hover mb-0"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "ID"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Color"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Hex"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Wins"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, this.state.colors.map(function (color) {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "ID"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Color"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Hex"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, "Wins"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tbody", null, console.log(this.state.colors), this.state.colors.map(function (color) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", {
           key: color.id
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("th", null, color.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
@@ -70803,7 +70806,10 @@ var AllColors = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this);
     _this.state = {
-      colors: []
+      colors: [],
+      currentColors: [],
+      currentPage: 1,
+      colorsPerPage: 10
     };
     return _this;
   }
@@ -70817,6 +70823,30 @@ var AllColors = /*#__PURE__*/function (_Component) {
         _this2.setState({
           colors: response.data
         });
+
+        _this2.handlePaginationCalculations();
+      });
+    }
+  }, {
+    key: "handlePaginationCalculations",
+    value: function handlePaginationCalculations() {
+      var indexOfLastColor = this.state.currentPage * this.state.colorsPerPage;
+      var indexOfFirstColor = indexOfLastColor - this.state.colorsPerPage;
+      this.setState({
+        currentColors: this.state.colors.slice(indexOfFirstColor, indexOfLastColor)
+      });
+    } // Called from pagination component
+
+  }, {
+    key: "changePage",
+    value: function changePage(newPage) {
+      var _this3 = this;
+
+      this.setState({
+        currentPage: newPage
+      }, function () {
+        // Callback for After state is changed, cause setState is async
+        _this3.handlePaginationCalculations();
       });
     }
   }, {
@@ -70827,8 +70857,12 @@ var AllColors = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, "All colors"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "container p-0"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_List__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        colors: this.state.colors
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Pagination__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+        colors: this.state.currentColors
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Pagination__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        colorsPerPage: this.state.colorsPerPage,
+        totalColors: this.state.colors.length,
+        changePage: this.changePage.bind(this)
+      })));
     }
   }]);
 
@@ -70880,44 +70914,56 @@ var Pagination = /*#__PURE__*/function (_Component) {
   var _super = _createSuper(Pagination);
 
   function Pagination() {
+    var _this;
+
     _classCallCheck(this, Pagination);
 
-    return _super.apply(this, arguments);
-  }
+    _this = _super.call(this);
+    _this.state = {
+      pageNumbers: []
+    };
+    return _this;
+  } // Calculate amount of pageNumbers
+  // We should not use componentDidUpdate hook here i think
+
 
   _createClass(Pagination, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      // Only allow one time - if pageNumbers array is empty
+      if (!this.state.pageNumbers.length) {
+        var newPageNumbers = [];
+
+        for (var i = 1; i <= Math.ceil(this.props.totalColors / this.props.colorsPerPage); i++) {
+          newPageNumbers.push(i);
+        }
+
+        this.setState({
+          pageNumbers: newPageNumbers
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
         "aria-label": "Page navigation example"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "pagination"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "page-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "page-link",
-        href: "#"
-      }, "Previous")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "page-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "page-link",
-        href: "#"
-      }, "1")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "page-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "page-link",
-        href: "#"
-      }, "2")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "page-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "page-link",
-        href: "#"
-      }, "3")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-        className: "page-item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "page-link",
-        href: "#"
-      }, "Next"))));
+      }, this.state.pageNumbers.map(function (pageNumber) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: pageNumber,
+          className: "page-item"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          className: "page-link",
+          href: "#",
+          onClick: function onClick() {
+            return _this2.props.changePage(pageNumber);
+          }
+        }, pageNumber));
+      })));
     }
   }]);
 
