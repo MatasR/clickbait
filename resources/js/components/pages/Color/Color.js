@@ -1,5 +1,5 @@
-// import axios from 'axios'
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import Comments from './Comments'
 
 class Color extends Component {
@@ -33,7 +33,10 @@ class Color extends Component {
           {/* Color info */}
           <ul className="list-group list-group-flush rounded shadow-sm">
             <li className="list-group-item"><b>Wins:</b> {color.wins}</li>
-            <li className="list-group-item"><b>Description:</b> {color.description}</li>
+            <li className="list-group-item">
+              <b>Description:</b> {color.description}
+              <Link to={"/color/"+color.id+"/edit"} className="btn btn-primary btn-sm float-right py-0 px-2">Edit</Link>
+            </li>
           </ul>
 
           {/* Comments (check if color.id is loaded, so we could start loading its comments) */}

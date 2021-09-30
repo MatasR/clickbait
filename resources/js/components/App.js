@@ -6,6 +6,7 @@ import Navigation from './Navigation'
 import Home from './pages/Home/Home'
 import AllColors from './pages/AllColors/AllColors'
 import Color from './pages/Color/Color'
+import EditColor from './pages/EditColor/EditColor'
 
 function App() {
     return (
@@ -14,7 +15,8 @@ function App() {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route path='/all-colors' component={AllColors} />
-            <Route path='/color/:id' component={Color} />
+            <Route exact path='/color/:id' component={Color} />
+            <Route path='/color/:id/edit' component={EditColor} />
           </Switch>
         </BrowserRouter>
     );

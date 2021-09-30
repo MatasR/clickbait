@@ -36,4 +36,11 @@ class ColorController extends Controller
       $color->wins++;
       $color->save();
     }
+
+    // Update color description
+    public function update(Request $request, Color $color)
+    {
+        $color->description = $request->description;
+        $color->save();
+    }
 }

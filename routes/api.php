@@ -21,6 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('colors', 'ColorController@index');
 Route::get('color/{color}', 'ColorController@show');
 Route::put('colors/vote/{color}', 'ColorController@vote');
+Route::post('color/{color}/edit', 'ColorController@update');
 
 Route::get('comments/{color}', 'CommentController@index');
 Route::post('comments', 'CommentController@store');
