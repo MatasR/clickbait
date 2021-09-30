@@ -11,11 +11,20 @@ class List extends Component {
     }
 
     componentDidMount() {
-      axios.get('/api/colors?'+(this.props.limit ? 'limit='+this.props.limit : '')+(this.props.order ? '&order='+this.props.order : '')).then(response => {
-        this.setState({
-          colors: response.data
+      // If colors are not passed as prop - get them from api
+      if(!this.props.colors){
+        axios.get('/api/colors?'+(this.props.limit ? 'limit='+this.props.limit : '')+(this.props.order ? '&order='+this.props.order : '')).then(response => {
+          this.setState({
+            colors: response.data
+          })
         })
-      })
+      }
+    }
+
+    componentDidUpdate() {
+      // If colors are passed as prop - get them at each update (only if the colors are not the same)
+      if(this.state.colors != this.props.colors)
+        this.setState({colors: this.props.colors})
     }
 
     render(){
@@ -24,7 +33,7 @@ class List extends Component {
           {/* Title */}
           {this.props.title &&
             <>
-              <h2 className="mt-3 ml-3 mb-0 float-left">Top 10 colors</h2>
+              <h2 className="mt-3 ml-3 mb-0 float-left">{this.props.title}</h2>
               <Link to="/all-colors" className="float-right m-3">All Colors</Link>
             </>
           }

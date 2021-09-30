@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 import List from '../../List'
+import Pagination from './Pagination'
 
 class AllColors extends Component {
     constructor() {
@@ -21,12 +22,12 @@ class AllColors extends Component {
     }
 
     render () {
-      const { colors } = this.state
       return (
         <div className="container">
           <h2>All colors</h2>
-          <div className="container bg-white shadow-sm rounded p-0">
-            <List order="wins"/>
+          <div className="container p-0">
+            <List colors={this.state.colors} />
+            <Pagination />
           </div>
         </div>
       )
