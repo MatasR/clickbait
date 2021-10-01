@@ -18,13 +18,17 @@ Project was developed with:
 
 ## Installation instructions
 
-- Clone the repository
-- Create a database and update .env file with db connection credentials
+- Clone the repository with `git clone https://github.com/MatasR/clickbait.git`
+- Change directory with `cd clickbait/`
+- Create a database
+- Duplicate .env.example to .env and update it with db connection credentials
 - run `npm install`
+- run `composer install`
+- run `php artisan key:generate`
 - run migrations with `php artisan migrate`
 - run db seeders with `php artisan db:seed`
-- run backend with `php artisan serve`
 - run frontend with `npm run dev`
+- run backend with `php artisan serve`
 - open your browser `127.0.0.1:8000`
 
 ## Happy voting!
