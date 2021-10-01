@@ -4,16 +4,6 @@
 
 Test project for laravel+react job position. Clickbait is a project where users can vote for a better color and find out the best one for their own projects. There is 4000 random generated colors with 4000 random comments. Users can edit color description. As well as create new and delete old comments for colors. All colors page is using custom build pagination. Its my first time with laravel+react, so a few places are not using best possible practice.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
 ## Requirements
 
 Project was developed with:
