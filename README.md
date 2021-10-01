@@ -1,4 +1,4 @@
-<p align="center"><img src="https://prnt.sc/1uc8vbc" width="400"></p>
+<p align="center"><img src="https://i.ibb.co/H7DNxfr/Screenshot-1.png" width="400"></p>
 
 ## About Clickbait
 
